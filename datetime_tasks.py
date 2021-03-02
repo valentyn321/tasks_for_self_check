@@ -45,12 +45,12 @@ def workdays_finder(year):
     return workdays
 
 
-def difference():
-    kiev_tz = pytz.timezone("Europe/Kiev")
-    chicago_tz = pytz.timezone("America/Chicago")
+def difference(tz1, tz2):
+    first_tz = pytz.timezone(tz1)
+    second_tz = pytz.timezone(tz2)
 
-    kiev_dt = kiev_tz.localize(dt(2000, 1, 24, 12, 35))
-    chicago_dt = chicago_tz.localize(dt(2000, 1, 25, 18, 35))
+    first_dt = first_tz.localize(dt(2000, 1, 24, 12, 35))
+    second_dt = second_tz.localize(dt(2000, 1, 25, 18, 35))
 
-    elapsedTime = chicago_dt - kiev_dt
+    elapsedTime = second_dt - first_dt
     return elapsedTime

@@ -9,7 +9,12 @@ from collections import deque
 # task with using namedtuple
 def operations(arg1, arg2):
     operations = namedtuple("Operations", ["sum", "concat", "mul", "div"])
-    result = operations(arg1 + arg2, str(arg1) + str(arg2), arg1 * arg2, arg1 / arg2)
+    result = operations(
+        int(arg1) + int(arg2),
+        str(arg1) + str(arg2),
+        int(arg1) * int(arg2),
+        int(arg1) / int(arg2),
+    )
     return result
 
 

@@ -1,19 +1,24 @@
 import calendar
+import pytz
 from datetime import datetime as dt
 from datetime import date
 
 
-s1 = dt.today().strftime("%d-%m-%Y")
-s2 = dt.today().strftime("%d %b, %A %y")
-s3 = dt.today().strftime("%d %B %Y")
-# print(s1, s2, s3)
-
-dt1 = dt.strptime(s1, "%d-%m-%Y")
-dt2 = dt.strptime(s2, "%d %b, %A %y")
-dt3 = dt.strptime(s3, "%d %B %Y")
-# print(dt1, dt2, dt3)
-
 year = 2021
+
+
+def today_to_str():
+    s1 = dt.today().strftime("%d-%m-%Y")
+    s2 = dt.today().strftime("%d %b, %A %y")
+    s3 = dt.today().strftime("%d %B %Y")
+    return s1, s2, s3
+
+
+def str_to_datetime(string_tuple):
+    dt1 = dt.strptime(string_tuple[0], "%d-%m-%Y")
+    dt2 = dt.strptime(string_tuple[1], "%d %b, %A %y")
+    dt3 = dt.strptime(string_tuple[2], "%d %B %Y")
+    return dt1, dt2, dt3
 
 
 def sundays_finder(year):
@@ -40,4 +45,12 @@ def workdays_finder(year):
     return workdays
 
 
-print(sundays_finder(year))
+def difference():
+    kiev_tz = pytz.timezone("Europe/Kiev")
+    chicago_tz = pytz.timezone("America/Chicago")
+
+    kiev_dt = kiev_tz.localize(dt(2000, 1, 24, 12, 35))
+    chicago_dt = chicago_tz.localize(dt(2000, 1, 25, 18, 35))
+
+    elapsedTime = chicago_dt - kiev_dt
+    return elapsedTime

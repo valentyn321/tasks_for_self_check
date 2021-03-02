@@ -7,13 +7,11 @@ class Person(object):
         self.last_name = last_name
         self.date_of_birth = date_of_birth
 
-
-person1 = Person("Valentyn", "Cherkasov", "03.02.2001")
-json_data = json.dumps(person1.__dict__, indent=4)
-print(json_data)
-
-with open("temp.json", "w") as f:
-    json.dump(json_data, f, sort_keys=True)
+    def toJSON(self):
+        with open("temp.json", "w") as f:
+            return json.dump(
+                self, f, default=lambda o: o.__dict__, sort_keys=True, indent=4
+            )
 
 
 """

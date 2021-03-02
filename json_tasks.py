@@ -7,15 +7,16 @@ class Person(object):
         self.last_name = last_name
         self.date_of_birth = date_of_birth
 
-person1 = Person('Valentyn', 'Cherkasov', '03.02.2001')
+
+person1 = Person("Valentyn", "Cherkasov", "03.02.2001")
 json_data = json.dumps(person1.__dict__, indent=4)
 print(json_data)
 
-with open('temp.json', 'w') as f:
+with open("temp.json", "w") as f:
     json.dump(json_data, f, sort_keys=True)
 
 
-'''
+"""
 measurements (list_of_dicts):
 
 json_writer -> 36.4 ms ± 1.93 ms per loop
@@ -35,4 +36,4 @@ pickle_writer -> 1.93 ms ± 132 µs per loop
 read_json -> 3.64 ms ± 424 µs per loo
 read_xml -> 20.8 ms ± 2.84 µs per loop
 read_pickle -> 1.7 ms ± 87.8 µs per loop
-'''
+"""

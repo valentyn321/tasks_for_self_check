@@ -59,10 +59,7 @@ class PublisherBooksUpdateView(SingleObjectMixin, FormView):
     def get(self, request, *args, **kwargs):
         # The Publisher we're editing:
         self.object = self.get_object(queryset=Publisher.objects.all())
-        try:
-            self.number = kwargs["number"]
-        except KeyError:
-            self.number = 1
+        self.number = kwargs.get("number", 1)
         return super().get(request, *args, **kwargs)
 
     def post(self, request, *args, **kwargs):

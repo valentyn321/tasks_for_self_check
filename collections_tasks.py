@@ -1,10 +1,7 @@
 import os
 import psutil
 
-from collections import namedtuple
-from collections import defaultdict
-from collections import deque
-
+from collections import namedtuple, defaultdict, deque
 
 # task with using namedtuple
 def operations(arg1: int, arg2: int):

@@ -9,6 +9,15 @@ flake8 = "*"
 isort = "*"
 prospector = "*"
 psutil = "*"
+pytest-django = "*"
+pytest-env = "*"
+pytest-forked = "*"
+pytest-factoryboy = "*"
+pytest-freezegun = "*"
+pytest-mock = "*"
+pytest-xdist = "*"
+conf = "*"
+ipdb = "*"
 
 [dev-packages]
 

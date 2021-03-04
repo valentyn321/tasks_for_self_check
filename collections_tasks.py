@@ -3,6 +3,7 @@ import psutil
 
 from collections import namedtuple, defaultdict, deque
 
+
 # task with using namedtuple
 def operations(arg1: int, arg2: int):
     Operations = namedtuple("Operations", ["sum", "concat", "mul", "div"])

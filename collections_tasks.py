@@ -1,21 +1,18 @@
 import os
 import psutil
 
-from collections import namedtuple
-from collections import defaultdict
-from collections import deque
+from collections import namedtuple, defaultdict, deque
 
 
 # task with using namedtuple
-def operations(arg1, arg2):
-    operations = namedtuple("Operations", ["sum", "concat", "mul", "div"])
-    result = operations(
-        int(arg1) + int(arg2),
+def operations(arg1: int, arg2: int):
+    Operations = namedtuple("Operations", ["sum", "concat", "mul", "div"])
+    return Operations(
+        arg1 + arg2,
         str(arg1) + str(arg2),
-        int(arg1) * int(arg2),
-        int(arg1) / int(arg2),
+        arg1 * arg2,
+        arg1 / arg2,
     )
-    return result
 
 
 # task with using defaultdict
@@ -28,15 +25,22 @@ print(d)
 print(d[4][1])
 print(d[0][2])
 
-# task with using deque(uncomment one section to test)
-# section1
-# numbers = list(range(1, 100000))
-# numbers.insert(0, 0)
-# section2
-# numbers = deque(range(1, 100000))
-# numbers.appendleft(0)
 
-pid = os.getpid()
-py = psutil.Process(pid)
-memoryUse = py.memory_info()[0] / 2.0 ** 30
-print("memory use:", memoryUse)
+def append_left_deque():
+    numbers = deque(range(1, 10000000))
+    numbers.appendleft(0)
+    pid = os.getpid()
+    py = psutil.Process(pid)
+    memoryUse = py.memory_info()[0] / 2.0 ** 30
+    print("memory use:", memoryUse)
+    return numbers
+
+
+def append_left_list():
+    numbers = list(range(1, 10000000000000))
+    numbers.insert(0, 0)
+    pid = os.getpid()
+    py = psutil.Process(pid)
+    memoryUse = py.memory_info()[0] / 2.0 ** 30
+    print("memory use:", memoryUse)
+    return numbers

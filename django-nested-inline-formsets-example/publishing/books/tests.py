@@ -1,12 +1,25 @@
-import pytest
 import ipdb
+import pytest
+from django.core.files.uploadedfile import SimpleUploadedFile
+from PIL import Image
 
+from config import settings
 from publishing.books.forms import PublisherBooksWithImagesFormset
 from publishing.books.models import Publisher
 
 
 @pytest.mark.django_db
-def test_is_valid():
+def test_is_valid(tmpdir):
+    temp_img = tmpdir.join("temp.png")
+    img = Image.new("RGB", (200, 30), "#ddd")
+    img.save(str(temp_img))
+
+    settings.MEDIA_ROOT = tmpdir
+    upload_file = SimpleUploadedFile(
+        name="temp.png",
+        content=open(str(temp_img), "rb").read(),
+        content_type="image/png",
+    )
     MyFormSet = PublisherBooksWithImagesFormset(extra=1)
     obj = Publisher.objects.create(name="Valentyn")
     data = {
@@ -25,6 +38,11 @@ def test_is_valid():
         "bookimage-books-0-images-0-id": "",
         "bookimage-books-0-images-0-book": "",
     }
-    formset = MyFormSet(data, instance=obj)
-    ipdb.set_trace()
+    formset = MyFormSet(
+        data,
+        files={
+            "bookimage-books-0-images-0-image": upload_file,
+        },
+        instance=obj,
+    )
     assert formset.is_valid()

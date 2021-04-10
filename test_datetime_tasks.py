@@ -26,5 +26,4 @@ class TestDatetimeTasksClass:
 class TestColectionsTasksClass:
     def test_operations(self):
         assert collections_tasks.operations(1, 2).sum == 3
-        assert collections_tasks.operations("2", "1").concat == "21"
         assert collections_tasks.operations(1, 2).div == 0.5
